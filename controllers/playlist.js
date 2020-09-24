@@ -1,12 +1,16 @@
 const { google } = require('googleapis');
+const getYotubePlaylistId = require('get-youtube-playlist-id')
 require('dotenv').config();
 
 //playlist details
 exports.data = (req,res,next) => {
+    const url = req.body.url;
+    const id = getYotubePlaylistId(url);
+
     google.youtube('v3').playlistItems.list({
         key: process.env.API_KEY,
         part: 'snippet, id',
-        playlistId: 'PL9ooVrP1hQOFdr0JzdVdi8PRRit63t0ry',
+        playlistId: id,
     }, (err, results) => {
         console.log(err ? err.message : results.data);
         res.json(results.data);
