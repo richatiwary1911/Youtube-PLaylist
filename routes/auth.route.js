@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const verifySignUp = require('../controllers/auth/validator');
-const auth = require('../controllers/auth/manualLogin');
+const verifySignUp = require('../controllers/auth/validator.controller');
+const auth = require('../controllers/auth/manualLogin.controller');
 
   //Manual AUTH
 

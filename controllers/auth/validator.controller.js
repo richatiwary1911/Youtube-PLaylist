@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+const User = require('../../models/user.model');
 
 exports.checkDuplication = (req, res, next) => {
     User.findOne({email: req.body.email})

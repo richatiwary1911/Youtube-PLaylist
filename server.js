@@ -5,8 +5,8 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('dotenv').config();
 
-const auth = require('./router/authRoutes');
-const viewsRoute = require('./router/views'); 
+const authRoute = require('./routes/auth.route');
+const viewsRoute = require('./routes/video.route'); 
 
 //DB Connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
@@ -26,9 +26,9 @@ app.use(cookieSession({
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
-require('./controllers/auth/googleAuth')(passport);
+require('./controllers/auth/googleAuth.controller')(passport);
 
-app.use(auth);
+app.use(authRoute);
 app.use(viewsRoute);
 
 app.listen(process.env.PORT || 8000);

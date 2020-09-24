@@ -11,9 +11,10 @@ const commentSchema = new mongoose.Schema({
         required: true
     },
 
-    // date: {
-    //     type: date
-    // }
+    date: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 const comment = mongoose.model('Comments',commentSchema);

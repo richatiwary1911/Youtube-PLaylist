@@ -1,10 +1,10 @@
-const Comment = require('../models/comments');
+const Comment = require('../models/comments.model');
 
 exports.comment = (req,res,next) => {
     const comment = new Comment({
         name: req.body.name,
         comment: req.body.comment,
-        //date: new Date()
+        date: req.body.date
     });
 
     comment.save((err,result) => {
