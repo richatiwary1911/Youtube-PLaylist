@@ -14,7 +14,7 @@ const auth = require('../controllers/auth/manualLogin');
 
   //Google AUTH
   router.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }
+  passport.authenticate('google', { scope: ['profile','email'] }
 ));
 
   //callback route for Google to redirect

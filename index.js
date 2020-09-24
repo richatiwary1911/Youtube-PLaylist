@@ -5,11 +5,11 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('dotenv').config();
 
-const routes = require('./router/authRoutes');
-const passportSetup = require('./controllers/auth/googleAuth');
+const auth = require('./router/authRoutes');
+const viewsRoute = require('./router/views'); 
 
 //DB Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 .then(() => console.log("Connected with database"))
 .catch((err) => console.log(err));
 
@@ -26,10 +26,20 @@ app.use(cookieSession({
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
+require('./controllers/auth/googleAuth')(passport);
 
-app.use(routes);
+app.use(auth);
+app.use(viewsRoute);
 
 app.listen(process.env.PORT || 8000);
+
+
+
+
+
+
+
+
 
 
 
